@@ -1,0 +1,11 @@
+$ docker info
+Client:
+ Version:    28.4.0
+ Context:    default
+ Debug Mode: false
+
+Server:
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+
+exit=1
+

@@ -1,0 +1,8 @@
+Docker Compose version v2.39.4
+$ docker compose -p logpulse config --quiet
+exit=0
+$ docker compose -p logpulse config --format json
+exit=0; configuration saved to compose-config.json
+Assertions: 3 services, loopback HTTP, Redis port private,
+REDIS_URL, service_healthy, healthcheck, volume, AOF: PASS
+Runtime execution: NOT PERFORMED; Docker Engine unavailable

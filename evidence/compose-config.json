@@ -1,0 +1,105 @@
+{
+  "name": "logpulse",
+  "networks": {
+    "default": {
+      "name": "logpulse_default",
+      "ipam": {}
+    }
+  },
+  "services": {
+    "api": {
+      "build": {
+        "context": "/Users/aizen/Documents/Codex/2026-11-01/new-chat-5/work/logpulse",
+        "dockerfile": "Dockerfile"
+      },
+      "command": null,
+      "depends_on": {
+        "redis": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "REDIS_URL": "redis://redis:6379/0"
+      },
+      "networks": {
+        "default": null
+      },
+      "ports": [
+        {
+          "mode": "ingress",
+          "host_ip": "127.0.0.1",
+          "target": 8000,
+          "published": "8000",
+          "protocol": "tcp"
+        }
+      ],
+      "restart": "unless-stopped"
+    },
+    "redis": {
+      "command": [
+        "redis-server",
+        "--appendonly",
+        "yes",
+        "--appendfsync",
+        "always"
+      ],
+      "entrypoint": null,
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "redis-cli",
+          "ping"
+        ],
+        "timeout": "1s",
+        "interval": "2s",
+        "retries": 20
+      },
+      "image": "redis:7.4-alpine",
+      "networks": {
+        "default": null
+      },
+      "restart": "unless-stopped",
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "redis-data",
+          "target": "/data",
+          "volume": {}
+        }
+      ]
+    },
+    "worker": {
+      "build": {
+        "context": "/Users/aizen/Documents/Codex/2026-11-01/new-chat-5/work/logpulse",
+        "dockerfile": "Dockerfile"
+      },
+      "command": [
+        "python",
+        "-m",
+        "app.worker"
+      ],
+      "depends_on": {
+        "redis": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "CONSUMER_NAME": "worker-1",
+        "REDIS_URL": "redis://redis:6379/0"
+      },
+      "networks": {
+        "default": null
+      },
+      "restart": "unless-stopped"
+    }
+  },
+  "volumes": {
+    "redis-data": {
+      "name": "logpulse_redis-data"
+    }
+  }
+}
