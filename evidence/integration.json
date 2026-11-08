@@ -1,0 +1,173 @@
+{
+  "environment": {
+    "python": "Python 3.12.14",
+    "redis": "7.4.2",
+    "docker": "not installed; Compose not executed"
+  },
+  "mixed": {
+    "accepted": 3,
+    "rejected": 2,
+    "errors": [
+      {
+        "line": 4,
+        "reason": "Строка 4: несуществующая дата или время"
+      },
+      {
+        "line": 5,
+        "reason": "Строка 5: неверный IPv4"
+      }
+    ]
+  },
+  "sample": {
+    "accepted": 36,
+    "rejected": 7,
+    "errors": [
+      {
+        "line": 37,
+        "reason": "Строка 37: несуществующая дата или время"
+      },
+      {
+        "line": 38,
+        "reason": "Строка 38: неверный IPv4"
+      },
+      {
+        "line": 39,
+        "reason": "Строка 39: недопустимое значение level"
+      },
+      {
+        "line": 40,
+        "reason": "Строка 40: HTTP-код вне диапазона 100–599"
+      },
+      {
+        "line": 41,
+        "reason": "Строка 41: длительность вне диапазона 0–600000"
+      },
+      {
+        "line": 42,
+        "reason": "Строка 42: rid должен содержать 8 шестнадцатеричных символов"
+      },
+      {
+        "line": 43,
+        "reason": "Строка 43: неверный формат записи"
+      }
+    ]
+  },
+  "before_worker": {
+    "queued_total": 36,
+    "processed_total": 0,
+    "level": {},
+    "service": {},
+    "status": {},
+    "top_slow": []
+  },
+  "before_restart": {
+    "queued_total": 36,
+    "processed_total": 36,
+    "level": {
+      "INFO": 12,
+      "WARN": 12,
+      "ERROR": 12
+    },
+    "service": {
+      "auth": 12,
+      "orders": 12,
+      "payment": 12
+    },
+    "status": {
+      "200": 9,
+      "201": 9,
+      "429": 9,
+      "503": 9
+    },
+    "top_slow": [
+      {
+        "rid": "00000024",
+        "duration_ms": 1295
+      },
+      {
+        "rid": "00000023",
+        "duration_ms": 1258
+      },
+      {
+        "rid": "00000022",
+        "duration_ms": 1221
+      },
+      {
+        "rid": "00000021",
+        "duration_ms": 1184
+      },
+      {
+        "rid": "00000020",
+        "duration_ms": 1147
+      }
+    ]
+  },
+  "schema_422": 422,
+  "openapi": 200,
+  "redis_commands": {
+    "XINFO STREAM logpulse:events": "length\n36\nradix-tree-keys\n1\nradix-tree-nodes\n2\nlast-generated-id\n1794144753259-35\nmax-deleted-entry-id\n0-0\nentries-added\n36\nrecorded-first-entry-id\n1794144753259-0\ngroups\n1\nfirst-entry\n1794144753259-0\ntimestamp\n2026-10-20T12:34:00Z\nlevel\nINFO\nservice\nauth\nip\n192.0.2.1\nmethod\nGET\npath\n/api/test\nstatus\n200\nduration_ms\n0\nrid\n00000001\nlast-entry\n1794144753259-35\ntimestamp\n2026-10-20T12:34:35Z\nlevel\nERROR\nservice\npayment\nip\n192.0.2.36\nmethod\nDELETE\npath\n/api/test\nstatus\n503\nduration_ms\n1295\nrid\n00000024\n",
+    "XLEN logpulse:events": "36\n",
+    "HGETALL logpulse:stats:level": "INFO\n12\nWARN\n12\nERROR\n12\n",
+    "HGETALL logpulse:stats:service": "auth\n12\norders\n12\npayment\n12\n",
+    "HGETALL logpulse:stats:status": "200\n9\n201\n9\n429\n9\n503\n9\n",
+    "ZREVRANGE logpulse:slow 0 4 WITHSCORES": "00000024\n1295\n00000023\n1258\n00000022\n1221\n00000021\n1184\n00000020\n1147\n",
+    "XPENDING logpulse:events logpulse-workers": "0\n\n\n\n"
+  },
+  "during_restart": {
+    "health_status": 503,
+    "health_body": {
+      "error": {
+        "code": "redis_unavailable",
+        "message": "Redis временно недоступен"
+      }
+    },
+    "stats_status": 503
+  },
+  "after_restart": {
+    "queued_total": 36,
+    "processed_total": 36,
+    "level": {
+      "INFO": 12,
+      "WARN": 12,
+      "ERROR": 12
+    },
+    "service": {
+      "auth": 12,
+      "orders": 12,
+      "payment": 12
+    },
+    "status": {
+      "200": 9,
+      "201": 9,
+      "429": 9,
+      "503": 9
+    },
+    "top_slow": [
+      {
+        "rid": "00000024",
+        "duration_ms": 1295
+      },
+      {
+        "rid": "00000023",
+        "duration_ms": 1258
+      },
+      {
+        "rid": "00000022",
+        "duration_ms": 1221
+      },
+      {
+        "rid": "00000021",
+        "duration_ms": 1184
+      },
+      {
+        "rid": "00000020",
+        "duration_ms": 1147
+      }
+    ]
+  },
+  "health_after": {
+    "status": "ok",
+    "redis": true
+  },
+  "preserved": true
+}

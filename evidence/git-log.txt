@@ -1,0 +1,12 @@
+* 0e0c56d (HEAD -> main) Document operation and add editable architecture
+* c6841c2 Configure container deployment and persistent Redis
+* facb756 Add validated FastAPI routes and API tests
+*   aa3c531 Merge Redis feature
+|\  
+| * 020c949 (feature/redis) Implement Redis stream worker and atomic counters
+|/  
+*   fcec5dc Merge parser feature
+|\  
+| * 4ece569 (feature/parser) Implement strict parser and synthetic fixtures
+|/  
+* ab6affc Initialize project and dependencies
